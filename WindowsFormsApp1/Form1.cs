@@ -22,24 +22,42 @@ namespace WindowsFormsApp1
             public string godvipysk;
             public artikyl artikyll;
             public abstract void Display(ListBox listBox1);
-            public Komplektyushie(int pricee, string godvipyskk, artikyl art)
+            public Komplektyushie(int pricee, string godvipyskk, artikyl artik)
             {
                 price = pricee;
                 godvipysk = godvipyskk;
-                artikyll = art;
+                artikyll = artik;
             }
-             class CPU : Komplektyushie
+             abstract class CPU : Komplektyushie<string>
             {
-                public int mhz;
-                public int cores;
-                public int streams;
-                public override void Display(ListBox listBox1);
-            } 
+                private static string artik;
+                protected int mhz;
+                protected int cores;
+                protected int streams;
+                public  CPU (int pricee, string godvipyskk, int mhzz, int coress, int streamss) : base(pricee, godvipyskk, artik)
+                {
+                    mhz = mhzz;
+                    cores = coress;
+                    streams = streamss;
+            }
+                    public abstract override void Display(ListBox listBox1);
 
-
+            }
+           class video : Komplektyushie
+            {
+                private int mhzCPU;
+                private string proizv;
+                private int memory;
+                private extern  video (int mhzCPUU, string proizvv, int memoryy)
+            }
+             
 
            
-            
+
+
+
+
+
 
         }
     }
