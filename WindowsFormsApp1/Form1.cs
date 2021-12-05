@@ -16,49 +16,67 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-        abstract class Komplektyushie<artikyl>
+        abstract class Compl<T>
         {
-            public int price;
-            public string godvipysk;
-            public artikyl artikyll;
-            public abstract void Display(ListBox listBox1);
-            public Komplektyushie(int pricee, string godvipyskk, artikyl artik)
+            private int Cena;
+            private string God;
+            T articul;
+            public Compl(int cena, string god, T ar)
             {
-                price = pricee;
-                godvipysk = godvipyskk;
-                artikyll = artik;
+                Cena = cena;
+                God = god;
+                articul = ar;
             }
-             abstract class CPU : Komplektyushie<string>
+            public virtual string Display()
             {
-                private static string artik;
-                protected int mhz;
-                protected int cores;
-                protected int streams;
-                public  CPU (int pricee, string godvipyskk, int mhzz, int coress, int streamss) : base(pricee, godvipyskk, artik)
-                {
-                    mhz = mhzz;
-                    cores = coress;
-                    streams = streamss;
+                return ($"Цена: {Cena}, Год выпуска: {God}, Артикул: {articul}");
             }
-                    public abstract override void Display(ListBox listBox1);
-
-            }
-           class video : Komplektyushie
+        }
+        class CP<T> : Compl<T>
+        {
+            public string chas { get; set; }
+            public int koly { get; set; }
+            public int kolp { get; set; }
+            public CP(string CH, int KY, int KP, int cena, string god, T ar) : base(cena, god, ar)
             {
-                private int mhzCPU;
-                private string proizv;
-                private int memory;
-                private extern  video (int mhzCPUU, string proizvv, int memoryy)
+                chas = CH;
+                koly = KY;
+                kolp = KP;
             }
-             
-
-           
-
-
-
-
-
+            public override string Display()
+            {
+                return ($"Частота: {chas}, Кол-во ядер: {koly}, Кол-во потоков: {kolp}");
+            }
+        }
+        class Video<T> : Compl<T>
+        {
+            private string GPU { get; set; }
+            private string Proiz { get; set; }
+            private int Ob { get; set; }
+            public Video(string gpu, string pro, int ob, int cena, string god, T ar) : base(cena, god, ar)
+            {
+                GPU = gpu;
+                Proiz = pro;
+                Ob = ob;
+            }
+            public override string Display()
+            {
+                return ($"Частота GPU: {GPU}, Производитель: {Proiz}, Объём памяти: {Ob}");
+            }
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CP<int> n1 = new CP<int>(textBox3.Text, Convert.ToInt32(textBox4.Text), Convert.ToInt32(textBox5.Text), Convert.ToInt32(textBox1.Text), textBox2.Text, Convert.ToInt32(textBox9.Text));
+            listBox1.Items.Add(n1.Display());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Video<int> n2 = new Video<int>(textBox6.Text, textBox7.Text, Convert.ToInt32(textBox8.Text), Convert.ToInt32(textBox1.Text), textBox2.Text, Convert.ToInt32(textBox9.Text));
+            listBox1.Items.Add(n2.Display());
+        }
     }
-}
+    }
+
